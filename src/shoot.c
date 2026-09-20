@@ -1984,7 +1984,7 @@ void kelvin_toggle( void* priv, int sign )
     lens_set_kelvin(k);
 }
 
-PROP_INT( PROP_WB_KELVIN_PH, wb_kelvin_ph );
+extern int wb_kelvin_ph;
 
 static MENU_UPDATE_FUNC(kelvin_display)
 {
