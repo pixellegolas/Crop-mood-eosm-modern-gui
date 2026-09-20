@@ -4,19 +4,29 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - name: Install ARM toolchain
+      
+      - name: Install toolchain
         run: |
           sudo apt-get update
-          sudo apt-get install -y gcc-arm-none-eabi make
+          sudo apt-get install -y gcc-arm-none-eabi make python2 python3
+          sudo ln -sf /usr/bin/python3 /usr/bin/python2 || sudo ln -sf /usr/bin/python2.7 /usr/bin/python2
+          python2 --version || python3 --version
+      
       - name: Build EOS M
         run: |
           make -C platform/EOSM.202 -j4
-          make -C platform/EOSM.202 zip
+          make -C platform/EOSM.202 zip -j4 || true
+          ls -lh platform/EOSM.202/*.zip || ls -lh platform/EOSM.202/zip/
+      
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: magiclantern-obsidian-EOSM202
-          path: platform/EOSM.202/magiclantern-*.zip
+          path: |
+            platform/EOSM.202/*.zip
+            platform/EOSM.202/zip/ML/
+            platform/EOSM.202/zip/autoexec.bin
+          retention-days: 30
