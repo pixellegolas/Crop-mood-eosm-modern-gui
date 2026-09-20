@@ -36,9 +36,18 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define MENU_FONT           FONT(FONT_LARGE,COLOR_WHITE,COLOR_BLACK)
-#define MENU_FONT_SEL       MENU_FONT
-#define MENU_FONT_GRAY      FONT(FONT_LARGE, entry->selected ? 60 : 50, COLOR_BLACK)
+#define OBSIDIAN_BG 0x0A0A0A
+#define OBSIDIAN_CARD 0x1E1E1E
+#define OBSIDIAN_CARD_SEL 0x12222E
+#define OBSIDIAN_ACCENT 0x00D4FF
+
+#undef MENU_FONT
+#undef MENU_FONT_SEL
+#undef MENU_FONT_GRAY
+
+#define MENU_FONT       FONT(FONT_MED, COLOR_WHITE, OBSIDIAN_BG)
+#define MENU_FONT_SEL   FONT(FONT_MED, COLOR_WHITE, OBSIDIAN_CARD_SEL)
+#define MENU_FONT_GRAY  FONT(FONT_LARGE, 50, OBSIDIAN_BG)
 
 int get_menu_font_sel();
 int gui_menu_shown();
@@ -443,17 +452,4 @@ extern void gui_open_menu( void );
 
 #endif
 
-// --- OBSIDIAN THEME FOR AMIT'S SLIM GUI - EOS M ---
-// File: src/menu.h
-// Based on Amit199167/Crop-mood-eosm-slim-gui (which already uses Roboto font)
 
-#define OBSIDIAN_BG 0x0A0A0A
-#define OBSIDIAN_CARD 0x1E1E1E
-#define OBSIDIAN_CARD_SEL 0x12222E
-#define OBSIDIAN_ACCENT 0x00D4FF
-
-#define MENU_FONT       FONT(FONT_MEDIUM,COLOR_WHITE,OBSIDIAN_BG)
-#define MENU_FONT_SEL   FONT(FONT_MEDIUM,COLOR_WHITE,OBSIDIAN_CARD_SEL)
-#define MENU_FONT_GRAY  FONT(FONT_MEDIUM, 50, OBSIDIAN_BG)
-
-// Custom page and Quick Toggles keep same font
